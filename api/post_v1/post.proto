@@ -1,0 +1,74 @@
+syntax = "proto3";
+
+package user_v1;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+
+option go_package = "user/pkg/post_v1/post_v1;post_v1";
+
+service UserServiceV1 {
+  rpc Create(CreateRequest) returns (CreateResponse);
+  rpc Update(UpdateRequest) returns (UpdateResponse);
+  rpc Get(GetRequest) returns (GetResponse);
+  rpc List(ListRequest) returns (ListResponse);
+  rpc Delete(DeleteRequest) returns (google.protobuf.Empty);
+}
+
+message CreateRequest {
+  PostInfo info = 1;
+}
+
+message CreateResponse {
+  Post post = 1;
+}
+
+message GetRequest {
+  int64 id = 1;
+}
+
+message GetResponse {
+  Post post = 1;
+}
+
+message UpdateRequest {
+  UpdatePostInfo info = 1;
+}
+
+message UpdateResponse {
+  Post post = 1;
+}
+
+message ListRequest {
+  google.protobuf.Int64Value limit = 1;
+}
+
+message ListResponse {
+  repeated Post post = 1;
+}
+
+message DeleteRequest {
+  int64 id = 1;
+}
+
+message UpdatePostInfo {
+  google.protobuf.StringValue title = 1;
+  google.protobuf.StringValue content = 2;
+  google.protobuf.StringValue user_id = 3;
+  google.protobuf.Int64Value rating = 4;
+}
+
+message Post {
+  int64 id = 1;
+  PostInfo info = 2;
+  google.protobuf.Timestamp created_at = 3;
+  google.protobuf.Timestamp updated_at = 4;
+}
+
+message PostInfo {
+  string title = 1;
+  string content = 2;
+  string user_id = 3;
+  int64 rating = 4;
+}
