@@ -7,7 +7,7 @@ import (
 	"google.golang.org/grpc/reflection"
 	"log"
 	"net"
-	"user/internal/config"
+	"post/internal/config"
 )
 
 const (
