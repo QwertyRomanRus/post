@@ -17,7 +17,7 @@ service PostServiceV1 {
 }
 
 message CreateRequest {
-  PostInfo info = 1;
+  PostInfoRequest info = 1;
 }
 
 message CreateResponse {
@@ -56,7 +56,6 @@ message UpdatePostInfo {
   google.protobuf.StringValue title = 1;
   google.protobuf.StringValue content = 2;
   google.protobuf.Int64Value user_id = 3;
-  google.protobuf.Int64Value rating = 4;
 }
 
 message Post {
@@ -71,4 +70,10 @@ message PostInfo {
   string content = 2;
   int64 user_id = 3;
   int64 rating = 4;
+}
+
+message PostInfoRequest {
+  string title = 1;
+  string content = 2;
+  int64 user_id = 3;
 }

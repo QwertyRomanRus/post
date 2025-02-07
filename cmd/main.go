@@ -7,7 +7,11 @@ import (
 	"google.golang.org/grpc/reflection"
 	"log"
 	"net"
+	"post/internal/api/post"
 	"post/internal/config"
+	postRepo "post/internal/repository/post"
+	postSvc "post/internal/service/post"
+	"post/pkg/post_v1"
 )
 
 const (
@@ -43,12 +47,12 @@ func main() {
 
 	defer l.Close()
 	// init user
-	//userRepository := userRepo.NewRepository(pgCon)
-	//userService := userSrv.NewService(userRepository)
-	//userApi := user.Implementation{UserService: userService}
+	postRepository := postRepo.NewRepository(pgCon)
+	postService := postSvc.NewService(postRepository)
+	postApi := post.Implementation{PostService: postService}
 
 	s := grpc.NewServer()
-	//post_v1.RegisterUserServiceV1Server(s, &userApi)
+	post_v1.RegisterPostServiceV1Server(s, &postApi)
 
 	reflection.Register(s)
 
