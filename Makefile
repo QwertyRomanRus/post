@@ -32,3 +32,15 @@ grpc-post-generate:
 	--go-grpc_out=pkg/post_v1 --go-grpc_opt=paths=source_relative \
 	--plugin=protoc-gen-go-grpc=bin/protoc-gen-go-grpc \
 	api/post_v1/post.proto
+
+# docker
+docker-build:
+	docker build --no-cache -t ${APP_NAME} .
+docker-stop:
+	docker stop ${APP_NAME}
+docker-rm:
+	docker rm ${APP_NAME}
+docker-run:
+	docker run -d -p ${GRPC_PORT}:50051 --network=${NETWORK} --name ${APP_NAME} ${APP_NAME}
+docker-start:
+	docker start ${APP_NAME}
